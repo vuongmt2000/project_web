@@ -34,7 +34,7 @@ const useHookProfile = () => {
             url: '/user/upload_cover_image',
             data: formData,
         })
-        if (data.code === 1000) {
+        if (data.code === 200) {
             // alert('upload thanh cong')
             // setModal(false)
             // setAvatar(null)
@@ -56,7 +56,7 @@ const useHookProfile = () => {
             url: '/user/upload_avatar',
             data: formData,
         })
-        if (data.code === 1000) {
+        if (data.code === 200) {
             // alert('upload thanh cong')
             setModal(false)
             setAvatar(null)
@@ -85,7 +85,7 @@ const useHookProfile = () => {
                     userId,
                 },
             })
-            if (data.code === 1000) {
+            if (data.code === 200) {
                 // alert('success')
             } else {
                 // alert('failed')
@@ -99,10 +99,10 @@ const useHookProfile = () => {
         try {
             const { data } = await callApiHttp({
                 method: 'PUT',
-                url: `/user/${localStorage.getItem('user_id')}`,
+                url: `/user`,
                 data: payload,
             })
-            if (data.code === 1000) {
+            if (data.code === 200) {
                 // alert('success')
                 // ToastError('THanh cong')
             } else {

@@ -26,14 +26,14 @@ const Body = () => {
                         messages[index - 1]?.sender === message?.sender &&
                         new Date(message?.created).getTime() -
                             new Date(messages[index - 1]?.created).getTime() <
-                            1000 * 60
+                            200 * 60
                             ? 1
                             : 0
                     const next =
                         messages[index + 1]?.sender === message?.sender &&
                         new Date(messages[index + 1]?.created).getTime() -
                             new Date(message?.created).getTime() <
-                            1000 * 60
+                            200 * 60
                             ? 1
                             : 0
                     const isMe = user === message?.sender

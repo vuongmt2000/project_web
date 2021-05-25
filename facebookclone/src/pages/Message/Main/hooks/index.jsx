@@ -87,7 +87,7 @@ function useProvideMain() {
                     method: 'GET',
                     url: `/conversation/${id}`,
                 })
-                if (data.code === 1000) {
+                if (data.code === 200) {
                     if (data.data) {
                         const { member, conversations } = data.data
                         isSubscribed && setUserInfo(member)

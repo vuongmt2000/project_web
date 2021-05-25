@@ -18,12 +18,12 @@ const Login = () => {
                 },
             })
             const { data } = res
-            if (data.code === 1000) {
+            if (data.code === 200) {
                 localStorage.setItem('user_id', data?.user_id)
                 localStorage.setItem('token', data?.token)
                 window.location.href = from.pathname
             } else {
-                setError(`${data?.message}- ${data?.description}`)
+                setError(`${data?.message} - ${data?.description}`)
             }
         } catch (error) {
             setError(error.message)
@@ -52,11 +52,11 @@ const Login = () => {
                     <input
                         className="p-4 rounded-md outline-none w-96 border border-gray-300"
                         id="email"
-                        type="text"
+                        type="email"
                         name="email"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
-                        placeholder="Email address or phone number"
+                        placeholder="Your email address"
                     />
                     <input
                         type="password"
@@ -65,6 +65,7 @@ const Login = () => {
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="Password"
                     />
+                    {error && <div>Error: {error}</div>}
                     <button
                         type="submit"
                         className="fb-bg-bt focus:outline-none p-3 text-white text-2xl font-semibold rounded-md w-96"
@@ -87,7 +88,6 @@ const Login = () => {
                     </div>
                 </form>
             </div>
-            {error && <div>Error: {error}</div>}
         </div>
     )
 }

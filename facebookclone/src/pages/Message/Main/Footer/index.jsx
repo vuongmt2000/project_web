@@ -66,14 +66,14 @@ const Footer = (props, ref) => {
             }
             const { data } = await axios({
                 method: 'post',
-                url: `${REACT_APP_API_URL}upload/images`,
+                url: `${REACT_APP_API_URL}/upload/image`,
                 data: formData,
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'x-access-token': `${localStorage.getItem('token')}`,
                 },
             })
-            if (data.code === 1000) {
+            if (data.code === 200) {
                 setFile([])
                 handleSubmitSendMessage(JSON.stringify(data.data), 'images')
             } else {

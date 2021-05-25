@@ -24,7 +24,7 @@ function useProvideBody() {
                 method: 'GET',
                 url: `/search/search_user?keyword=${keyword}`,
             })
-            if (data.code === 1000) {
+            if (data.code === 200) {
                 setListUsers(data.data)
             } else {
                 // console.log(data.message)

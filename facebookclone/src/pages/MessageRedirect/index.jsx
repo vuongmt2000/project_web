@@ -12,7 +12,7 @@ const MessageRedirect = () => {
                 method: 'GET',
                 url: '/conversation/get_last_conversation',
             })
-            if (data.code === 1000) {
+            if (data.code === 200) {
                 if (data.data?.length > 0) {
                     const { members } = data.data[0]
                     setLastConversation(

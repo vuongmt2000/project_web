@@ -1,5 +1,5 @@
 import { useProvideUser } from 'hooks/useUser'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import AvatarBlock16 from './AvatarBlock16'
 // import routes from 'routes'
@@ -13,7 +13,11 @@ import WatchIconFacebook from './UI/WatchIconFacebook'
 
 function NavBar() {
     const [showDropdown, setShowDropdown] = useState(false)
-    const { userInfo } = useProvideUser()
+    const [userInfo, setUserInfo] = useState();
+    useProvideUser();
+    useEffect(() => {
+        setUserInfo(JSON.parse(localStorage.getItem('user_info')));
+    })
     return (
         <div className="fixed z-50 w-full fb-bg-dark flex flex-row items-center justify-between border-b border-gray-500">
             <div className="ml-4 flex flex-row space-x-2 items-center">
@@ -60,7 +64,7 @@ function NavBar() {
                         className="w-7 h-7 mr-1"
                     />
                     <span className="mr-1 font-semibold">
-                        {userInfo?.username || 'username null'}
+                        {`${userInfo?.firstname} ${userInfo?.lastname}` || 'Name'}
                     </span>
                 </NavLink>
 
@@ -84,18 +88,6 @@ function NavBar() {
                     </div>
                 )}
             </div>
-
-            {/* {routes.map((route) => (
-                <NavLink
-                    key={route.path}
-                    to={route.path}
-                    exact
-                    activeClassName="fb-bg-active"
-                    className="p-4 fb-hover-bg-dark"
-                >
-                    {route.name}
-                </NavLink>
-            ))} */}
         </div>
     )
 }
