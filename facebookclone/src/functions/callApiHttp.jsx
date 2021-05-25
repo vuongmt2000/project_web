@@ -1,5 +1,6 @@
-import axios from 'axios'
+
 import { REACT_APP_API_URL } from 'commons/constants'
+
 
 
 const callApiHttp = ({ url, method, baseURL, data, params }) =>
@@ -20,5 +21,7 @@ const callApiHttp = ({ url, method, baseURL, data, params }) =>
                 })
             })
     )
+
+
 
 export default callApiHttp
