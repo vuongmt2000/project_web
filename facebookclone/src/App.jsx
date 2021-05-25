@@ -29,7 +29,7 @@ function AppIml() {
                     })}
                 >
                     <Switch>
-                        <PublicRoute path="/" exact component={HomePage} />
+                        <PrivateRoute path="/" exact component={HomePage} />
                         <PublicRoute
                             restricted
                             path="/login"
