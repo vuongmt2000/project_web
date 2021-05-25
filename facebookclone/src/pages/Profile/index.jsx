@@ -22,8 +22,7 @@ const ProfileImpl = () => {
         handleChangeAvatar,
         handleUnfriend,
         handleSubmitInfo,
-        loadingCover,
-        // setLoadingCover,
+        loadingCover
     } = useHookProfile()
     const [showOptionsEditCover, setShowOptionsEditCover] = useState(false)
 
@@ -85,7 +84,7 @@ const ProfileImpl = () => {
             </div>
             <div>
                 <div className="text-4xl font-bold text-center">
-                    {userInfo?.username || 'Null'}
+                    {`${userInfo.firstname} ${userInfo.lastname}` || 'Name'}
                 </div>
             </div>
             <div className="px-72">

@@ -25,11 +25,11 @@ function useProvideUser() {
     const fetchUserInfo = async () => {
         try {
             const res = await callApiHttp({
-                url: `/user/${localStorage.getItem('user_id')}`,
+                url: `/user`,
                 method: 'GET',
             })
             const { data } = res
-            if (data.code === 1000) {
+            if (data.code === 200) {
                 setUserInfo(data.data)
                 localStorage.setItem('user_info', JSON.stringify(data.data))
             } else {

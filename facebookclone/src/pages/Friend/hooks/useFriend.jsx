@@ -40,7 +40,7 @@ function useProvideFriend() {
                 }),
             ])
             // const { data } = res1
-            if (res1.data.code === 1000 || res2.data.code === 1000) {
+            if (res1.data.code === 200 || res2.data.code === 200) {
                 const data = { ...res1.data.data, ...res2.data.data }
                 setUserFriends(data)
                 localStorage.setItem('user_friends', JSON.stringify(data))
@@ -62,7 +62,7 @@ function useProvideFriend() {
                     is_accept: type,
                 },
             })
-            if (data.code === 1000) {
+            if (data.code === 200) {
                 // alert('success')
             } else {
                 // alert('failed')
@@ -82,7 +82,7 @@ function useProvideFriend() {
                 },
             })
             const { data } = res
-            if (data.code === 1000) {
+            if (data.code === 200) {
                 // alert('success')
             } else {
                 // alert('failed')
@@ -102,7 +102,7 @@ function useProvideFriend() {
                 },
             })
             const { data } = res
-            if (data.code === 1000) {
+            if (data.code === 200) {
                 // alert('success')
             } else {
                 // alert('failed')
@@ -118,7 +118,7 @@ function useProvideFriend() {
                 url: `/search/search_user?keyword=${keyword}`,
             })
             const { data } = res
-            if (data.code === 1000) {
+            if (data.code === 200) {
                 setUsers(data?.data)
                 return data?.data
             }

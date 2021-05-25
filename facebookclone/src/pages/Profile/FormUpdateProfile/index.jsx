@@ -10,13 +10,35 @@ const FormUpdateProfile = ({ handleSubmitInfo, userInfo }) => {
             className="flex flex-col space-y-2 border border-white p-4"
             onSubmit={handleSubmit(handleSubmitInfo)}
         >
-            <div className="text-2xl font-semibold">Form update profile</div>
+            <div className="text-2xl font-semibold">Update your profile</div>
+            <label htmlFor="firstname">
+                <div className="w-20 inline-block">First Name:</div>
+
+                <input
+                    name="firstname"
+                    placeholder="First Name"
+                    defaultValue={userInfo?.firstname}
+                    className="rounded-full focus:outline-none p-2 fb-bg-dark-2"
+                    ref={register({ required: true })}
+                />
+            </label>
+            <label htmlFor="lastname">
+                <div className="w-20 inline-block">Last Name:</div>
+
+                <input
+                    name="lastname"
+                    placeholder="Last Name"
+                    defaultValue={userInfo?.lastname}
+                    className="rounded-full focus:outline-none p-2 fb-bg-dark-2"
+                    ref={register({ required: true })}
+                />
+            </label>
             <label htmlFor="username">
-                <div className="w-20 inline-block">username:</div>
+                <div className="w-20 inline-block">Username:</div>
 
                 <input
                     name="username"
-                    placeholder="username"
+                    placeholder="Username"
                     defaultValue={userInfo?.username}
                     className="rounded-full focus:outline-none p-2 fb-bg-dark-2"
                     ref={register({ required: true })}
@@ -30,7 +52,7 @@ const FormUpdateProfile = ({ handleSubmitInfo, userInfo }) => {
                     placeholder="email"
                     defaultValue={userInfo?.email}
                     className="rounded-full focus:outline-none p-2 fb-bg-dark-2"
-                    ref={register({ required: true })}
+                    disabled
                 />
             </label>
             <label htmlFor="birthday">
@@ -38,6 +60,7 @@ const FormUpdateProfile = ({ handleSubmitInfo, userInfo }) => {
 
                 <input
                     name="birthday"
+                    type="date"
                     defaultValue={userInfo?.birthday}
                     placeholder="birthday"
                     className="rounded-full focus:outline-none p-2 fb-bg-dark-2"

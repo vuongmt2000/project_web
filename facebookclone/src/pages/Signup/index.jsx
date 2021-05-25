@@ -7,21 +7,25 @@ function Signup() {
         const res = await callApiHttp({
             url: '/user',
             data: {
+                firstname,
+                lastname,
                 email,
-                password,
+                password
             },
             method: 'POST',
         })
         const { data } = res
-        if (data.code === 1000) {
+        if (data.code === 200) {
             window.location.href = '/login'
         } else {
-            setError(`Error: ${data.error}- ${data.description}`)
+            setError(`${data.message} - ${data.description}`)
         }
     }
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [firstname, setFirstname] = useState('')
+    const [lastname, setLastname] = useState('')
     const [error, setError] = useState('')
     return (
         <div className="w-screen h-screen flex items-center justify-center bg-gray-200">
@@ -30,23 +34,29 @@ function Signup() {
                 className="w-96 text-black bg-gray-100 rounded-lg p-7 space-y-3"
                 style={{ width: '400px' }}
             >
-                <div className="flex font-semibold text-3xl"> Đăng ký</div>
-                <div>Nhanh chóng và dễ dàng.</div>
+                <div className="flex font-semibold text-3xl">Sign Up</div>
+                <div>Quick and Easy</div>
                 <hr />
                 <div className="flex justify-center space-x-2">
                     <input
                         className="inline min-w-0 p-2 rounded border boder-black-300"
                         placeholder="First name"
+                        type="text"
+                        value={firstname}
+                        onChange={(e) => setFirstname(e.target.value)}
                     />
                     <input
                         className="inline min-w-0 p-2 rounded border boder-black-300"
                         placeholder="Last name"
+                        type="text"
+                        value={lastname}
+                        onChange={(e) => setLastname(e.target.value)}
                     />
                 </div>
                 <input
                     className="p-2 w-full rounded border boder-black-300"
-                    placeholder="Email address or phone number"
-                    type="text"
+                    placeholder="Email address"
+                    type="email"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                 />
@@ -57,30 +67,7 @@ function Signup() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                {/* <label htmlFor="email">
-                    <div className="font-bold text-lg ">Email:</div>
-                    <input
-                        id="email"
-                        className="fb-bg-dark-2 px-3 py-2 rounded-full outline-none w-full"
-                        type="text"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="email"
-                    />
-                </label>
-                <label htmlFor="password">
-                    <div className="font-bold text-lg " htmlFor="password">
-                        Password:
-                    </div>
-                    <input
-                        id="password"
-                        className="fb-bg-dark-2 px-3 py-2 rounded-full outline-none w-full"
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        placeholde="password"
-                    />
-                </label> */}
+                {error && <div>Error: {error}</div>}
                 <div className="flex justify-center">
                     <button
                         type="submit"
@@ -90,8 +77,6 @@ function Signup() {
                     </button>
                 </div>
             </form>
-
-            {error && <div>Error: {error}</div>}
         </div>
     )
 }

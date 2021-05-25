@@ -16,7 +16,7 @@ const ListConversations = () => {
                 method: 'GET',
                 url: '/conversation/',
             })
-            if (data.code === 1000) {
+            if (data.code === 200) {
                 setListConversations(
                     data.data.sort(
                         (a, b) =>
