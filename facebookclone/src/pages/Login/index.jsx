@@ -22,8 +22,12 @@ const Login = () => {
                 localStorage.setItem('user_id', data?.user_id)
                 localStorage.setItem('token', data?.token)
                 window.location.href = from.pathname
-            } else {
-                setError(`${data?.message} - ${data?.description}`)
+            } else if(data.code === 400){
+                setError('You need to fill all the information!');
+            }else if(data.code === 402){
+                setError('Your email or password is incorrect!');
+            }else {
+                setError('Login error! Please, try again!');
             }
         } catch (error) {
             setError(error.message)
@@ -65,7 +69,7 @@ const Login = () => {
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="Password"
                     />
-                    {error && <div>Error: {error}</div>}
+                    {error && <div className="invalid">{error}</div>}
                     <button
                         type="submit"
                         className="fb-bg-bt focus:outline-none p-3 text-white text-2xl font-semibold rounded-md w-96"

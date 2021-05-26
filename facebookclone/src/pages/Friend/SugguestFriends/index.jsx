@@ -14,12 +14,14 @@ const SuggestFriends = ({ users = [] }) => {
         if (_id !== localStorage.getItem('user_id')) {
             if (isFriend) {
                 return (
-                    <Link
-                        to={`message/t/${_id}`}
-                        className="fb-bg-main flex-grow rounded-lg py-2 px-4"
-                    >
-                        Message
-                    </Link>
+                    <div className="pt-2 space-x-4">
+                        <Link
+                            to={`message/t/${_id}`}
+                            className="fb-bg-main flex-grow rounded-lg py-2 px-4"
+                        >
+                            Message
+                        </Link>
+                    </div> 
                 )
             }
             return (
@@ -53,6 +55,8 @@ const SuggestFriends = ({ users = [] }) => {
                         const {
                             _id,
                             avatar,
+                            firstname,
+                            lastname,
                             username,
                             email,
                             is_friend: isFriend,
@@ -66,7 +70,7 @@ const SuggestFriends = ({ users = [] }) => {
                                     />
                                     <div className="px-4 flex-grow">
                                         <div className="text-lg">
-                                            {username || email || 'null'}
+                                            { `${firstname} ${lastname}` || 'null'}
                                         </div>
                                         {renderButton(_id, isFriend)}
                                     </div>

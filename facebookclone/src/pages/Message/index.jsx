@@ -55,8 +55,8 @@ function Message() {
         <div className="modal-content animate flex text-black items-start p-4">
          
             <img className="rounded-full object-cover w-12 h-12" src={avatar} alt=""/>
-<div>{username||email||"null"} đang gọi bạn</div>
-<a className="bg-blue-600 mx-4" href={modalContent?.linkVideoCall} onClick={()=>setIsOpen(x=>!x)} target="blank">Nghe</a>
+            <div>{username||email||"null"} đang gọi bạn</div>
+            <a className="bg-blue-600 mx-4" href={modalContent?.linkVideoCall} onClick={()=>setIsOpen(x=>!x)} target="blank">Nghe</a>
           <button className="bg-blue-500 rounded-md" type="button" onClick={() => setIsOpen((x) => !x)}>
             close
           </button>

@@ -3,11 +3,11 @@ import { useForm } from 'react-hook-form'
 import PropTypes from 'prop-types'
 
 const FormUpdateProfile = ({ handleSubmitInfo, userInfo }) => {
-    const { register, handleSubmit, errors } = useForm()
+    const { register, handleSubmit, formState: { errors } } = useForm()
 
     return (
         <form
-            className="flex flex-col space-y-2 border border-white p-4"
+            className="flex flex-col space-y-2 border border-white p-4 mb-10"
             onSubmit={handleSubmit(handleSubmitInfo)}
         >
             <div className="text-2xl font-semibold">Update your profile</div>
@@ -16,6 +16,7 @@ const FormUpdateProfile = ({ handleSubmitInfo, userInfo }) => {
 
                 <input
                     name="firstname"
+                    type="text"
                     placeholder="First Name"
                     defaultValue={userInfo?.firstname}
                     className="rounded-full focus:outline-none p-2 fb-bg-dark-2"
@@ -27,6 +28,7 @@ const FormUpdateProfile = ({ handleSubmitInfo, userInfo }) => {
 
                 <input
                     name="lastname"
+                    type="text"
                     placeholder="Last Name"
                     defaultValue={userInfo?.lastname}
                     className="rounded-full focus:outline-none p-2 fb-bg-dark-2"
@@ -41,7 +43,7 @@ const FormUpdateProfile = ({ handleSubmitInfo, userInfo }) => {
                     placeholder="Username"
                     defaultValue={userInfo?.username}
                     className="rounded-full focus:outline-none p-2 fb-bg-dark-2"
-                    ref={register({ required: true })}
+                    ref={register({required: true })}
                 />
             </label>
             <label htmlFor="email">
@@ -67,8 +69,7 @@ const FormUpdateProfile = ({ handleSubmitInfo, userInfo }) => {
                     ref={register({ required: true })}
                 />
             </label>
-            {errors.exampleRequired && <span>This field is required</span>}
-
+            {errors.birthday && <span className="invalid">You need fill all the informations</span>}
             <button className="w-20 p-2 fb-bg-main rounded-lg" type="submit">
                 Save
             </button>
