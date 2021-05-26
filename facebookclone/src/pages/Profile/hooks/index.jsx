@@ -35,14 +35,9 @@ const useHookProfile = () => {
             data: formData,
         })
         if (data.code === 200) {
-            // alert('upload thanh cong')
-            // setModal(false)
-            // setAvatar(null)
-            setTimeout(() => {
-                setLoadingCover(false)
-            }, 500)
+            setLoadingCover(false);
         } else {
-            // alert('upload fail')
+            alert('Change your cover image fail! Try again!');
         }
     }
 
@@ -57,11 +52,10 @@ const useHookProfile = () => {
             data: formData,
         })
         if (data.code === 200) {
-            // alert('upload thanh cong')
             setModal(false)
             setAvatar(null)
         } else {
-            // alert('upload fail')
+            alert('Change avatar fail! Try again!');
         }
     }
 
@@ -103,13 +97,12 @@ const useHookProfile = () => {
                 data: payload,
             })
             if (data.code === 200) {
-                // alert('success')
-                // ToastError('THanh cong')
+                alert('Update profile success.')
             } else {
-                // alert('failed')
+                alert('Update profile fail!')
             }
         } catch (error1) {
-            // setError(error1?.message)
+            alert(`Error: ${error1}`)
         }
     }
 
@@ -118,9 +111,12 @@ const useHookProfile = () => {
         handleChangeCover,
         modal,
         setModal,
+        avatar,
+        setAvatar,
         modalRef,
         handleSubmitAvatar,
         previewAvatar,
+        setPreviewAvatar,
         handleChangeAvatar,
         handleUnfriend,
         handleSubmitInfo,

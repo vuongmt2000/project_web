@@ -17,8 +17,12 @@ function Signup() {
         const { data } = res
         if (data.code === 200) {
             window.location.href = '/login'
-        } else {
-            setError(`${data.message} - ${data.description}`)
+        } else if(data.code === 400){
+            setError('You need to fill all the information!');
+        }else if(data.code === 403){
+            setError('Your email is used! Try another email!');
+        }else {
+            setError('Login error! Please, try again!');
         }
     }
 
@@ -67,7 +71,7 @@ function Signup() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                 />
-                {error && <div>Error: {error}</div>}
+                {error && <div className="invalid">{error}</div>}
                 <div className="flex justify-center">
                     <button
                         type="submit"

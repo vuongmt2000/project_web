@@ -1,5 +1,6 @@
-import React, { useState } from 'react'
-import { ProvideUser } from 'hooks/useUser'
+import React, { useState, useEffect } from 'react'
+import { ProvideUser, useProvideUser} from 'hooks/useUser'
+import callApiHttp from 'functions/callApiHttp'
 import logo from 'assets/images/avatar.png'
 import { IoIosCamera } from 'react-icons/io'
 
@@ -12,19 +13,101 @@ import ModalEditAvatar from './ModalEditAvatar'
 
 const ProfileImpl = () => {
     const {
-        userInfo,
         modal,
         setModal,
         modalRef,
+        avatar,
+        setAvatar,
         previewAvatar,
-        handleChangeCover,
-        handleSubmitAvatar,
+        setPreviewAvatar,
         handleChangeAvatar,
         handleUnfriend,
-        handleSubmitInfo,
+        setLoadingCover,
         loadingCover
     } = useHookProfile()
+
+    useProvideUser();
+    const [userInfo, setUserInfo] = useState(JSON.parse(localStorage.getItem('user_info')))
     const [showOptionsEditCover, setShowOptionsEditCover] = useState(false)
+
+    useEffect(() => {
+        setUserInfo(JSON.parse(localStorage.getItem('user_info')))
+    })
+
+    const fetchUserInfo = async () => {
+        try {
+            const res = await callApiHttp({
+                url: `/user`,
+                method: 'GET',
+            })
+            const { data } = res
+            if (data.code === 200) {
+                setUserInfo(data.data)
+                localStorage.setItem('user_info', JSON.stringify(data.data))
+            } else {
+                alert(`Error : ${res}`)
+            }
+        } catch (error) {
+            alert(`Error : ${error}`)
+        }
+    }
+
+    const handleSubmitInfo = async (payload) => {
+        try {
+            const { data } = await callApiHttp({
+                method: 'PUT',
+                url: `/user`,
+                data: payload,
+            })
+            if (data.code === 200) {
+                await fetchUserInfo();
+                alert('Update profile success.')
+            } else {
+                alert('Update profile fail!')
+            }
+        } catch (error) {
+            alert(`Error: ${error}`)
+        }
+    }
+
+    const handleSubmitAvatar = async (e) => {
+        e.preventDefault()
+        const formData = new FormData()
+        formData.append('avatar', avatar)
+
+        const { data } = await callApiHttp({
+            method: 'POST',
+            url: '/user/upload_avatar',
+            data: formData,
+        })
+        if (data.code === 200) {
+            setModal(false)
+            setAvatar(null)
+            setPreviewAvatar()
+            await fetchUserInfo()
+        } else {
+            alert('Change avatar fail! Try again!');
+        }
+    }
+
+    const handleChangeCover = async (e) => {
+        setLoadingCover(true)
+        e.preventDefault()
+        const file = e.target.files[0]
+        const formData = new FormData()
+        formData.append('cover_image', file)
+        const { data } = await callApiHttp({
+            method: 'POST',
+            url: '/user/upload_cover_image',
+            data: formData,
+        })
+        if (data.code === 200) {
+            await fetchUserInfo();
+            setLoadingCover(false);
+        } else {
+            alert('Change your cover image fail! Try again!');
+        }
+    }
 
     return (
         <div className="w-full min-h-full flex flex-col fb-bg-dark">
@@ -93,10 +176,10 @@ const ProfileImpl = () => {
                     userInfo={userInfo}
                     handleSubmitInfo={handleSubmitInfo}
                 />
-                <ListsFriendsProfile
+                {/* <ListsFriendsProfile
                     friends={userInfo?.friends}
                     handleUnfriend={handleUnfriend}
-                />
+                /> */}
             </div>
         </div>
     )

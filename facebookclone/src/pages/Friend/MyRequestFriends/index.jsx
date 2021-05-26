@@ -14,7 +14,7 @@ const MyRequestFriends = ({ users = [] }) => {
                 {users.length > 0 ? (
                     users.map((friend, index) => {
                         const fuser = friend?.user
-                        const { _id, avatar, username, email } = fuser
+                        const { _id, avatar, firstname, lastname, username, email } = fuser
                         return (
                             <Link to={`/friend/${_id}`} key={_id}>
                                 <div className="flex flex-row p-2 rounded-lg fb-hover-bg-dark">
@@ -24,7 +24,7 @@ const MyRequestFriends = ({ users = [] }) => {
                                     />
                                     <div className="px-4 flex-grow">
                                         <div className="text-lg">
-                                            {username || email || 'null'}
+                                            {`${firstname} ${lastname}` || 'null'}
                                         </div>
                                         <button
                                             type="button"

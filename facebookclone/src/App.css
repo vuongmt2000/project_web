@@ -254,3 +254,11 @@ body {
     }
   }
   
+
+.invalid {
+    color: red;
+    padding: 5px;
+    border: red 1px solid;
+    background-color: rgba(255, 0, 0, 0.329);
+    border-radius: 3px;
+}
