@@ -1,4 +1,5 @@
 import React from 'react'
+import { VIDEO_CALL_URL } from 'commons/constants'
 import { Redirect } from 'react-router-dom'
 import AvatarBlock16 from 'components/AvatarBlock16'
 import CallIconFacebook from 'components/UI/CallIconFacebook'
@@ -21,7 +22,7 @@ const Header = () => {
 
     const handleClickCall = () => {
         console.log(`userId`, userId)
-        socket.emit("CALL_VIDEO", {userId, linkVideoCall: `https://videocall2411.herokuapp.com/videocall/${conversationId}`,
+        socket.emit("CALL_VIDEO", {userId, linkVideoCall: `${VIDEO_CALL_URL}/videocall/${conversationId}`,
         senderId: localStorage.getItem("user_id")
     })
     }
@@ -45,7 +46,7 @@ const Header = () => {
                 )}
             </div>
             <a
-                href={`https://videocall2411.herokuapp.com/videocall/${conversationId}`}
+                href={`${VIDEO_CALL_URL}/videocall/${conversationId}`}
                 target="_blank"
                 rel="noreferrer"
                 className="cursor-pointer"
@@ -54,7 +55,7 @@ const Header = () => {
                 <CallIconFacebook onClick={() => handleClickCall()} />
             </a>
             <a
-                href={`https://videocall2411.herokuapp.com/videocall/${conversationId}`}
+                href={`${VIDEO_CALL_URL}/videocall/${conversationId}`}
                 target="_blank"
                 rel="noreferrer"
                 className="cursor-pointer"
